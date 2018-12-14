@@ -1,0 +1,39 @@
+---
+- name: configuration
+  hosts: all
+  gather_facts: false # remove later! speeds up testing
+  become: true
+
+  tasks:
+    - name: enable repos
+      copy:
+        src: ./open_three-tier-app.repo
+        dest: /etc/yum.repos.d/open_three-tier-app.repo
+        mode: 0644
+
+- name: deploy front-end load balancer haproxy
+  hosts: frontends
+  gather_facts: false
+  become: true
+  tags:
+    - lb-tier
+  roles:
+    - { name: lb-tier }
+
+- name: deploy app-tier - tomcat
+  hosts: apps
+  gather_facts: false
+  become: true
+  tags:
+    - app-tier
+  roles:
+    - { name: app-tier }
+
+- name: deploy db-tier - postgres
+  hosts: appdbs
+  gather_facts: false
+  become: true
+  tags:
+    - db-tier
+  roles:
+    - { name: db-tier }

@@ -1,0 +1,30 @@
+---
+GUID: 01eb
+DOMAIN_POSTFIX: example.opentlc.com
+DOMAIN_NAME: "{{ GUID }}.{{ DOMAIN_POSTFIX }}"
+# SSH settings
+SSH_KEY: "{{ GUID }}key.pem"
+# Yum repo settings
+REPO_FILE: open_three-tier-app.repo
+
+# HAPROXY settings
+HAPROXY_PORT: 80
+
+# Tomcat settings
+TOMCAT_PORT: 8080
+TOMCAT_APP_HOME: /usr/share/tomcat/webapps
+
+# Gradle settings
+GRADLE_VERSION: 4.4
+GRADLE_HOME: /opt
+
+# SpringBoot Settings
+SPRINGBOOT_PORT: 8080
+APPLICATION_HOME: "{{ TOMCAT_APP_HOME }}/student-app"
+
+# Postgres settings
+DATABASE_NAME: postgres
+DATABASE_USER: postgres
+DATABASE_PASSWORD: ansible
+POSTGRES_PORT: 5432
+
